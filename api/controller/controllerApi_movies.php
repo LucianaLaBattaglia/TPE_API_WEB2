@@ -47,10 +47,6 @@ function delete_movie($params=[]){
 
 }
 
-
-
-
-
    
     function add_movie($params=[]){
       
@@ -65,6 +61,30 @@ function delete_movie($params=[]){
     
 
         }
+
+
+        public function eddit_movie($params = null) {
+        
+            $id = $params[':ID'];
+            $body = $this->getData();
+            echo $id;
+            $movie = $this->model->get_movie($id);
+            if ($movie) {
+                $this->model->edit_movie( $body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date, $id);
+                return $this->json_response("La pelicula fue modificada con exito", 200);
+            } else
+                return $this->Json_response("La pelicula con el id={$id} no existe", 404);
+        }
+
+
+
+
+
+
+
+
+
+
 
      }
 

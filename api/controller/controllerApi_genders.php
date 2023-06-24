@@ -32,8 +32,8 @@ class controllerApi_genders extends api{
         $id = $params[':ID'];
         $data = $this->getData();
         
-        $movie = $this->model->get_gender($id);
-        if ($movie) {
+        $gender = $this->model->get_gender($id);
+        if ($gender) {
             $this->model->edit_gender( $data->name_gender,$data->prox_estreno,$data->amount, $id);
             return $this->json_response("El genero fue modificado con exito.", 200);
         } else

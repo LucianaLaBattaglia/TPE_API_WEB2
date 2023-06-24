@@ -63,9 +63,9 @@ function add_movie($movie_name, $movie_image, $synopsis, $id_gender, $movie_date
     
 }
 
-function edit_movie($movie){
-    $sentense = $this->db->prepare('UPDATE movies SET movie_name=?,movie_image=?,id_gender=?,movie_date=?,synopsis=? WHERE id_movie = ?');
-    $sentense->execute($movie);
+function edit_movie( $movie_name, $movie_image, $synopsis, $id_gender,$movie_date, $id){
+    $sentense = $this->db->prepare('UPDATE movies SET movie_name=?,movie_image=?,synopsis=?,id_gender=?,movie_date=? WHERE id_movie = ?');
+    $sentense->execute(array($movie_name, $movie_image, $synopsis, $id_gender,$movie_date, $id));
 }
 function get_movie($id){
     $sentense = $this->db->prepare("SELECT * FROM movies WHERE id_movie = ?");

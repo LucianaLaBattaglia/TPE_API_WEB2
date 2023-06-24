@@ -14,7 +14,7 @@ $router = new Router();
 $router->addRoute('movies','GET','controllerApi_movies','get_movies');
 $router->addRoute('movies/:ID', 'GET', 'controllerApi_movies', 'get_movies');
 $router->addRoute('movies', 'POST', 'controllerApi_movies', 'add_movie');
-
+$router->addRoute('movies/:ID', 'PUT', 'controllerApi_movies', 'eddit_movie');
 $router->addRoute('movies/:ID', 'DELETE', 'controllerApi_movies', 'delete_movie');
 
 //define la tabla de ruteo genders
