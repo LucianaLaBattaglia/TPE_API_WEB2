@@ -32,21 +32,36 @@ class controllerApi_genders extends api{
         $id = $params[':ID'];
         $data = $this->getData();
         
-        $tarea = $this->model->get_gender($id);
-        if ($tarea) {
+        $movie = $this->model->get_gender($id);
+        if ($movie) {
             $this->model->edit_gender( $data->name_gender,$data->prox_estreno,$data->amount, $id);
-            return $this->json_response("La pelicula fue modificada con exito.", 200);
+            return $this->json_response("El genero fue modificado con exito.", 200);
         } else
-            return $this->Json_response("La pelicula con el id={$id} no existe", 404);
+            return $this->Json_response("El genero con el id={$id} no existe", 404);
     }
+
+
+    public function add_gender($params =[]) {
+        
+        if(sizeof($params)!=0){
+            $data = $this->getData();
+            $this->model->add_gender( $data->name_gender,$data->prox_estreno);
+            return $this->json_response("El genero fue creado con exito.", 200);
+        } else
+            return $this->Json_response("Fallo crear genero", 404);
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
 
 
 

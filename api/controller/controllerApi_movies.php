@@ -53,22 +53,14 @@ function delete_movie($params=[]){
 
    
     function add_movie($params=[]){
-        print_r($params);
       
         if(sizeof($params)==0){
             $body=$this->getData();
-                echo $body->movie_name;
-            $movie_name=$body->movie_name;
-            $movie_image=$body->movie_image;
-            $id_gender= $body->id_gender;
-            $movie_data= $body->movie_data;
-            $synopsis= $body->synopsis;
-           
-            $this->model->add_movie($movie_name, $movie_image, $id_gender,$movie_data, $synopsis);
+            $this->model->add_movie($body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date);
             return $this->json_response("La movie fue agregada con exito", 200);
 
         }else{
-            return $this->json_response("fallo agrear", 404);
+            return $this->json_response("fallo agregar", 404);
         }
     
 

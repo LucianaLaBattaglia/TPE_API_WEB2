@@ -57,10 +57,10 @@ function delete_movie($id){
     $sentense = $this->db->prepare("DELETE FROM movies WHERE movies.id_movie = ?");
     $sentense->execute([$id]);
 }
-function add_movie($movie_name, $movie_image, $id_gender, $movie_data, $synopsis){
-    $sentense = $this->db->prepare('INSERT INTO movies (movie_name,'."movie_image".',id_gender,'."movie_date".',synopsis) VALUES (?,?,?,?,?)');
-    $sentense->execute(array($movie_name, $movie_image, $id_gender, $movie_data, $synopsis));
-    header('location:'.URL_BASE.'/movieList');
+function add_movie($movie_name, $movie_image, $synopsis, $id_gender, $movie_date){
+    $sentense = $this->db->prepare('INSERT INTO movies (movie_name, movie_image, synopsis, id_gender,movie_date) VALUES (?,?,?,?,?)');
+    $sentense->execute(array($movie_name, $movie_image, $synopsis, $id_gender, $movie_date));
+    
 }
 
 function edit_movie($movie){
