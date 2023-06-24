@@ -40,9 +40,9 @@ function delete_movie($params=[]){
 
     if($movie){
         $this->model->delete_movie($movie_id);
-        $this->json_response("eliminada con exito", 200);
+        return $this->json_response("eliminada con exito", 200);
     }else{
-        $this->json_response("fallo eliminar", 404);
+        return $this->json_response("fallo eliminar", 404);
     }
 
 }
@@ -68,7 +68,7 @@ function delete_movie($params=[]){
             return $this->json_response("La movie fue agregada con exito", 200);
 
         }else{
-            $this->json_response("fallo agrear", 404);
+            return $this->json_response("fallo agrear", 404);
         }
     
 

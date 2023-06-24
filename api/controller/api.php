@@ -30,7 +30,6 @@ private function _requestStatus($code){
 
 
 function getdata(){
-  echo "hola manola";
   return json_decode($this->data);
 }
 

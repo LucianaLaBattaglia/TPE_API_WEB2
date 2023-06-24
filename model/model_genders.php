@@ -32,10 +32,11 @@ function add_gender($gender){
    
 }
 
-function edit_gender($gender){
+function edit_gender($name, $prox_estreno,$amount, $id){
     //edita un genero
+
     $sentense=$this->db->prepare("UPDATE genders SET name_gender=?, prox_estreno=?,amount=? WHERE genders.id_gender = ?");
-    $sentense->execute($gender);
+    $sentense->execute(array($name, $prox_estreno,$amount, $id));
    
 }
 
