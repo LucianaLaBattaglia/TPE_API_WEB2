@@ -19,7 +19,6 @@ class controllerApi_genders extends api{
 
     public function get_genders(){
         
-    
             $data= $this->model->get_genders();
     
         if(isset($data)){
@@ -48,7 +47,7 @@ class controllerApi_genders extends api{
         if(sizeof($params)!=0){
             $data = $this->getData();
             $this->model->add_gender( $data->name_gender,$data->prox_estreno);
-            return $this->json_response("El genero fue creado con exito.", 200);
+            return $this->json_response("El genero fue creado con exito.", 201);
         } else
             return $this->Json_response("Fallo crear genero", 404);
     }

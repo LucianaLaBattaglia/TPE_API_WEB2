@@ -22,13 +22,7 @@ class controllerApi_movies extends api{
             $data= $this->model->get_movie($id_movie);
         }else{
             if(isset($_GET['sort']) && isset($_GET['order'])){
-            $sort=$_GET['sort'];
-            $order= $_GET['order'];
-                if($sort== 'id_name' || $sort=='id_gender' || $sort== 'movie_date'){
-                     $data= $this->model->get_movies_ordenadas($sort,$order);
-                }else{
-                    return $this->json_response("parametro inexistente", 404);
-                }
+                $this->get_movies_ordenadas();
             }else{
                 $data= $this->model->get_movies();
             }
@@ -40,6 +34,23 @@ class controllerApi_movies extends api{
         }
 
     }
+
+function get_movies_ordenadas(){
+    $sort=$_GET['sort'];
+    $order= $_GET['order'];
+        if($sort== 'movie_name' || $sort=='id_gender' || $sort== 'movie_date'){
+             $data= $this->model->get_movies_ordenadas($sort,$order);
+        }else{
+            return $this->json_response("parametro inexistente", 404);
+        }
+
+}
+
+
+
+
+
+
 
 function delete_movie($params=[]){
     $movie_id=$params[':ID'];
@@ -60,7 +71,7 @@ function delete_movie($params=[]){
         if(sizeof($params)==0){
             $body=$this->getData();
             $this->model->add_movie($body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date);
-            return $this->json_response("La movie fue agregada con exito", 200);
+            return $this->json_response("La movie fue agregada con exito", 201);
 
         }else{
             return $this->json_response("fallo agregar", 404);
