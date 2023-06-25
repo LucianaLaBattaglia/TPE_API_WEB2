@@ -22,6 +22,7 @@ $router->addRoute('genders','GET','controllerApi_genders','get_genders');
 //$router->addRoute('genders/:ID', 'GET', 'controllerApi_genders', 'get_genders');
 $router->addRoute('genders/:ID', 'PUT', 'controllerApi_genders', 'eddit_gender');
 $router->addRoute('genders', 'POST', 'controllerApi_genders', 'add_gender');
+$router->addRoute('genders/:ID', 'DELETE', 'controllerApi_genders', 'delete_gender');
 // rutea*/
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 

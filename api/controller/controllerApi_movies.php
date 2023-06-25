@@ -65,7 +65,6 @@ function delete_movie($params=[]){
         }else{
             return $this->json_response("fallo agregar", 404);
         }
-    
 
         }
 
@@ -74,7 +73,7 @@ function delete_movie($params=[]){
         
             $id = $params[':ID'];
             $body = $this->getData();
-            echo $id;
+           
             $movie = $this->model->get_movie($id);
             if ($movie) {
                 $this->model->edit_movie( $body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date, $id);
