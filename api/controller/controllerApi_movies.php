@@ -20,33 +20,18 @@ class controllerApi_movies extends api{
         if(sizeof($id)!=0){  
             $id_movie= $id[':ID'];  
             $data= $this->model->get_movie($id_movie);
-
         }else{
             if(isset($_GET['sort']) && isset($_GET['order'])){
             $sort=$_GET['sort'];
             $order= $_GET['order'];
-            
-            switch ($sort){
-                case 'genero':
-                    $sort= 'id_gender';
-                    break;
-                case 'nombre':
-                    $sort= 'movie_name';
-                    break;
-                case 'fecha':
-                    $sort='movie_date';
-                    break;
-                default:
-                    $sort=null;
-                    return $this->json_response("parametro inexistenge", 404);
-                    die();
+                if($sort== 'id_name' || $sort=='id_gender' || $sort== 'movie_date'){
+                     $data= $this->model->get_movies_ordenadas($sort,$order);
+                }else{
+                    return $this->json_response("parametro inexistente", 404);
+                }
+            }else{
+                $data= $this->model->get_movies();
             }
-            $data= $this->model->get_movies_ordenadas($sort,$order);
-
-        }
-        else{
-            $data= $this->model->get_movies();
-        }
         }
         if(isset($data)){
             return $this->json_response($data, 200);
