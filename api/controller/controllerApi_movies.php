@@ -19,10 +19,10 @@ class controllerApi_movies extends api{
 
     function get_movie($id){
             
-        if(sizeof($id)!=0){  
+        if(!empty($id)){  
             $id_movie= $id[':ID']; 
-            $movie= $this->model->get_movieDetail($id_movie);
-            if(sizeof($movie)){
+            $movie= $this->model->get_movie($id_movie);
+            if(!empty($movie)){
                 
                 return $this->json_response($movie, 200);
             }else{
@@ -39,15 +39,15 @@ class controllerApi_movies extends api{
 
 
     function get_movies(){   
-        if(isset($_GET['sort'])){
+        if(!empty($_GET['sort'])){
             $movies=$this->get_movies_ordenadas();    
-        }else if( isset($_GET['id_gender'])){
+        }else if( !empty($_GET['id_gender'])){
             $movies=$this->get_moviesXgender();
         }
         else{
             $movies= $this->model->get_movies();
             } 
-        if(isset($movies)){
+        if(!empty($movies)){
             return $this->json_response($movies, 200);
         }else{
             return $this->json_response(null, 404);
@@ -57,9 +57,10 @@ class controllerApi_movies extends api{
     function get_movies_ordenadas(){
         
         $sort=$_GET['sort'];
-        $order= $_GET['order'];
-            if($sort=='movie_name' || $sort=='id_gender' || $sort== 'movie_date'){
-                if(isset($order)){
+        
+            if($sort=='id_movie'||$sort=='movie_name' || $sort=='id_gender' || $sort== 'movie_date'){
+                if(!empty($_GET['order'])){
+                    $order= $_GET['order'];
                     $movies= $this->model->get_movies_ordenadas($sort,$order);
                     return $movies;
                 }else{
@@ -78,7 +79,7 @@ class controllerApi_movies extends api{
         $gender=$this->model_genders->get_gender($id_gender);
     
        
-        if(isset($gender)){
+        if(!empty($gender)){
             $movies=$this->model->movieXgender($id_gender);
             return $movies;
         }
@@ -112,16 +113,18 @@ class controllerApi_movies extends api{
     }
 
    
-    function add_movie($params=[]){
+    function add_movie(){
       
-        if(sizeof($params)==0){
+        
             $body=$this->getData();
-            $this->model->add_movie($body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date);
-            return $this->json_response("La pelicula fue agregada con exito", 201);
+            if($this->body_verify($body)){
+                return $this->Json_response("existen campos incompletos", 404);
+               }
 
-        }else{
-            return $this->json_response("fallo agregar", 404);
-        }
+            if(!empty($body)){
+            $this->model->add_movie($body->movie_name, $body->movie_image,      $body->synopsis, $body->id_gender,$body->movie_date);
+             return $this->json_response("La pelicula fue agregada con exito", 201);
+            }
 
         }
 
@@ -130,6 +133,10 @@ class controllerApi_movies extends api{
         
         $id = $params[':ID'];
         $body = $this->getData();
+           if($this->body_verify($body)){
+            return $this->Json_response("no se admite campos vacios", 404);
+            
+           }
            
         $movie = $this->model->get_movie($id);
         if ($movie) {
@@ -139,7 +146,9 @@ class controllerApi_movies extends api{
                 return $this->Json_response("La pelicula con el id={$id} no existe", 404);
         }
 
-
+        function body_verify($body){
+            return empty($body->movie_name)|| empty($body->movie_image)|| empty($body->synopsis)|| empty($body->id_gender)|| empty($body->movie_date);
+        }
      }
 
 

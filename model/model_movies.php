@@ -11,7 +11,7 @@ public function __construct(){
 
 function get_movies(){
     //trae la tabla de peliculas
-    $sentense = $this->db->prepare("SELECT * FROM movies");
+    $sentense= $this->db->prepare("SELECT movies.id_movie, movies.movie_name, movies.movie_image, movies.synopsis, genders.name_gender, movies.movie_date  FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender ORDER BY id_movie ");
     $sentense->execute();
     return $sentense->fetchAll(PDO::FETCH_OBJ);
 }
@@ -42,7 +42,7 @@ function movieXgender($id){
 }
 function get_movieDetail($id){
 
-    $sentense= $this->db->prepare("SELECT movies.id_movie, movies.movie_name, movies.movie_image, movies.synopsis, genders.name_gender, movies.movie_date  FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender WHERE movies.id_movie=?");
+    $sentense= $this->db->prepare("SELECT * FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender WHERE movies.id_movie=?");
     $sentense ->execute([$id]);
     return $sentense->fetchAll(PDO::FETCH_OBJ);
 }
@@ -69,7 +69,7 @@ function edit_movie( $movie_name, $movie_image, $synopsis, $id_gender,$movie_dat
     $sentense->execute(array($movie_name, $movie_image, $synopsis, $id_gender,$movie_date, $id));
 }
 function get_movie($id){
-    $sentense = $this->db->prepare("SELECT * FROM movies WHERE id_movie = ?");
+    $sentense= $this->db->prepare("SELECT movies.id_movie, movies.movie_name, movies.movie_image, movies.synopsis, genders.name_gender, movies.movie_date  FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender WHERE movies.id_movie=?");
     $sentense->execute([$id]);
     return $sentense->fetch(PDO::FETCH_OBJ);
 

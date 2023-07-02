@@ -25,6 +25,7 @@ function get_gender($id){
 
 function add_gender($name_gender, $prox_estreno){
     $sentense=$this->db->prepare("INSERT INTO `genders` (`name_gender`, `prox_estreno`) VALUES (?, ?)");
+    
     $sentense->execute(array($name_gender, $prox_estreno));
    
 }

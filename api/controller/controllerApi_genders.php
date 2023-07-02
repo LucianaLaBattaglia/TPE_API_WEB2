@@ -19,12 +19,12 @@ class controllerApi_genders extends api{
 
     public function get_genders(){
         
-            $data= $this->model->get_genders();
+        $data= $this->model->get_genders();
     
         if(isset($data)){
             return $this->json_response($data, 200);
         }else{
-            return $this->json_response(null, 404);
+            return $this->json_response('no existen generos', 404);
         }
 
     }
@@ -32,7 +32,9 @@ class controllerApi_genders extends api{
         
         $id = $params[':ID'];
         $data = $this->getData();
-        
+        if($this->data_verify($data)){
+            return $this->Json_response("No se admiten campos vacios", 404);
+        }
         $gender = $this->model->get_gender($id);
         if ($gender) {
             $this->model->edit_gender( $data->name_gender,$data->prox_estreno,$data->amount, $id);
@@ -42,14 +44,19 @@ class controllerApi_genders extends api{
     }
 
 
-    public function add_gender($params =[]) {
+    public function add_gender() {
         
-        if(sizeof($params)!=0){
+        
             $data = $this->getData();
+            
+            // if($this->data_verify($data)){
+            //     return $this->Json_response("No se admiten campos vacios", 404);
+            // }
+            
+            // if(!empty($data)){
             $this->model->add_gender( $data->name_gender,$data->prox_estreno);
             return $this->json_response("El genero fue creado con exito.", 201);
-        } else
-            return $this->Json_response("Fallo crear genero", 404);
+            // }
     }
    
     public function delete_gender($params=[]){
@@ -58,7 +65,7 @@ class controllerApi_genders extends api{
         $movie=$this->model_movies->movieXgender($gender_id);
         
         if($gender){
-            if((sizeof($movie)==0)){
+            if((!empty($movie))){
             $this->model->delete_gender($gender_id);
             return $this->json_response("eliminada con exito", 200);
             }else{
@@ -71,7 +78,9 @@ class controllerApi_genders extends api{
     
     }
 
-
+    function data_verify($data){
+        return empty($data->name_gender)|| empty($data->prox_estreno);
+    }
 
 
 
