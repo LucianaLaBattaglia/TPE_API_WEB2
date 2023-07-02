@@ -46,11 +46,16 @@ class controllerApi_movies extends api{
         }
         else{
             $movies= $this->model->get_movies();
+            if(!empty($_GET['page'])){
+
+            $movies = $this->paged_movies($movies,$_GET['page']);
+            DIE();
+            }
             } 
         if(!empty($movies)){
             return $this->json_response($movies, 200);
         }else{
-            return $this->json_response(null, 404);
+            return $this->json_response("no hay peliculas disponibles", 404);
         }
 
     }
@@ -149,7 +154,19 @@ class controllerApi_movies extends api{
         function body_verify($body){
             return empty($body->movie_name)|| empty($body->movie_image)|| empty($body->synopsis)|| empty($body->id_gender)|| empty($body->movie_date);
         }
+        function paged_movies($movies,$page){
+            
+            $paged = array_chunk($movies,5);
+            if(count($paged)>=$page){
+                $index = $page-1;
+            return $paged[$index];
+            }else{
+                return $this->Json_response("pagina no encontrada",404);
+            }
+            
      }
-
+     
+        
+    }
 
 ?>
