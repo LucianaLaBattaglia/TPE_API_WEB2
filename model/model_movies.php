@@ -42,7 +42,7 @@ function movieXgender($id){
 }
 function get_movieDetail($id){
 
-    $sentense= $this->db->prepare("SELECT * FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender WHERE movies.id_movie=?");
+    $sentense= $this->db->prepare("SELECT movies.id_movie, movies.movie_name, movies.movie_image, movies.synopsis, genders.name_gender, movies.movie_date  FROM `movies`JOIN `genders` ON genders.id_gender = movies.id_gender WHERE movies.id_movie=?");
     $sentense ->execute([$id]);
     return $sentense->fetchAll(PDO::FETCH_OBJ);
 }

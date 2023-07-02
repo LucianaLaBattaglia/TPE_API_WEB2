@@ -7,12 +7,13 @@ require_once 'api/controller/controllerApi_movies.php';
 require_once 'api/controller/controllerApi_genders.php';
 $controllerApi_movies=new controllerApi_movies();
 $controllerApi_genders=new controllerApi_genders();
+$controllerApi_login=new controllerApi_login();
 // crea el router
 $router = new Router();
 
 // define la tabla de ruteo movies
 $router->addRoute('movies','GET','controllerApi_movies','get_movies');
-$router->addRoute('movies/:ID', 'GET', 'controllerApi_movies', 'get_movies');
+$router->addRoute('movies/:ID', 'GET', 'controllerApi_movies', 'get_movie');
 $router->addRoute('movies', 'POST', 'controllerApi_movies', 'add_movie');
 $router->addRoute('movies/:ID', 'PUT', 'controllerApi_movies', 'eddit_movie');
 $router->addRoute('movies/:ID', 'DELETE', 'controllerApi_movies', 'delete_movie');
@@ -23,6 +24,10 @@ $router->addRoute('genders','GET','controllerApi_genders','get_genders');
 $router->addRoute('genders/:ID', 'PUT', 'controllerApi_genders', 'eddit_gender');
 $router->addRoute('genders', 'POST', 'controllerApi_genders', 'add_gender');
 $router->addRoute('genders/:ID', 'DELETE', 'controllerApi_genders', 'delete_gender');
+
+//$router->addRoute('token, POST, controllerApi_login');
+
+
 // rutea*/
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 
