@@ -5,9 +5,11 @@ require_once 'libs/Router.php';
 require_once 'api/controller/api.php';
 require_once 'api/controller/controllerApi_movies.php';
 require_once 'api/controller/controllerApi_genders.php';
+//require_once 'api/controller/controllerApi_login.php';
+
 $controllerApi_movies=new controllerApi_movies();
 $controllerApi_genders=new controllerApi_genders();
-$controllerApi_login=new controllerApi_login();
+//$controllerApi_login=new controllerApi_login();
 // crea el router
 $router = new Router();
 

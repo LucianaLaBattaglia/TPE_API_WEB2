@@ -18,13 +18,20 @@ class controllerApi_movies extends api{
     }
 
     function get_movie($id){
+            
         if(sizeof($id)!=0){  
-            $id_movie= $id[':ID'];  
+            $id_movie= $id[':ID']; 
             $movie= $this->model->get_movieDetail($id_movie);
-            if(isset($movie)){
+            if(sizeof($movie)){
+                
                 return $this->json_response($movie, 200);
+            }else{
+                
+                return $this->json_response("La pelicula con el id={$id_movie} no existe", 404);
             }
+
         }else{
+            
         return $this->json_response(null, 404);
         }
 
@@ -104,7 +111,7 @@ class controllerApi_movies extends api{
         if(sizeof($params)==0){
             $body=$this->getData();
             $this->model->add_movie($body->movie_name, $body->movie_image, $body->synopsis, $body->id_gender,$body->movie_date);
-            return $this->json_response("La movie fue agregada con exito", 201);
+            return $this->json_response("La pelicula fue agregada con exito", 201);
 
         }else{
             return $this->json_response("fallo agregar", 404);
