@@ -39,7 +39,7 @@ class controllerApi_movies extends api{
 
 
     function get_movies(){   
-        if(isset($_GET['sort']) && isset($_GET['order'])){
+        if(isset($_GET['sort'])){
             $movies=$this->get_movies_ordenadas();    
         }else if( isset($_GET['id_gender'])){
             $movies=$this->get_moviesXgender();
@@ -59,8 +59,14 @@ class controllerApi_movies extends api{
         $sort=$_GET['sort'];
         $order= $_GET['order'];
             if($sort=='movie_name' || $sort=='id_gender' || $sort== 'movie_date'){
-                $movies= $this->model->get_movies_ordenadas($sort,$order);
-                return $movies;
+                if(isset($order)){
+                    $movies= $this->model->get_movies_ordenadas($sort,$order);
+                    return $movies;
+                }else{
+                    $movies=$this->model->get_movies_ordenadas($sort);
+                    return $movies;
+                }
+               
             }else{
                 return $this->json_response("parametro inexistente", 404);
             }

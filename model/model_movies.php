@@ -46,7 +46,7 @@ function get_movieDetail($id){
     $sentense ->execute([$id]);
     return $sentense->fetchAll(PDO::FETCH_OBJ);
 }
-function get_movies_ordenadas($sort, $order){
+function get_movies_ordenadas($sort, $order="ASC"){
     $sentense = $this->db->prepare("SELECT * FROM `movies` ORDER BY $sort $order");
     $sentense->execute();
     return $sentense->fetchAll(PDO::FETCH_OBJ);
