@@ -65,7 +65,7 @@ ejemplo de respuesta: Status:  200  "OK"
 
 | Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| id|ID del contacto a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
+| id|ID de la pelicula a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
 
 respuesta: Status:  200 "OK"
 
@@ -88,7 +88,7 @@ permite agregar una pelicula a la base de datos
 | --------| ------------| ------------ | 
 | POST| Api/movies    | https://localhost/Api/movies |
 
-| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| Atributo  | Descripcion  | Tipo  |  caracter  | Ejemplo |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | movie_name | Nombre de la película que se quiere agregar. |string |Obligatorio  |  El oso panda|
 |movie_image |url a la imagen de la pelicula | string | Obligatorio| http://galeria/imagen.jpg |
@@ -113,13 +113,17 @@ respuesta: Status:  201 "Create OK"
 
 
 ### Editar pelicula
-permite agregar una pelicula a la base de datos
+permite editar una pelicula a la base de datos
 
 | Verbo  | End-point    | Ejemplo  |
 | --------| ------------| ------------ | 
-| POST| Api/movies    | https://localhost/Api/movies |
+| POST| Api/movies/:ID    | https://localhost/Api/movies/:ID |
 
-| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| :ID|ID de la pelicula a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
+
+| Atributo  | Descripcion  | Tipo  |  caracter  | Ejemplo |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | id_movie | ID de la película que se quiere editar. |integer |Obligatorio  |  3|
 | movie_name | Nombre de la película que se quiere editar. |string |Obligatorio  |  La mascara|
@@ -188,4 +192,48 @@ ejemplo de respuesta: Status:  200 "OK"
 ]
 ```
 
+### Obtener un genero en particular
 
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| GET | Api/genders/:ID     | https://localhost/Api/genders/:ID |
+
+| Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| id|ID del genero a obtener |Integer |https://localhost/Api/genders/2  | Obligatorio |
+
+respuesta: Status:  200 "OK"
+
+```json
+{
+        "id_gender": 2,
+        "name_gender": "Terror",
+        "amount": 2,
+        "prox_estreno": "Aterrados"
+    }
+```
+
+### Editar genero
+permite editar un genero a la base de datos
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| POST| Api/genders/:ID   | https://localhost/Api/genders/7 |
+
+| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| :ID | ID del genero que se quiere editar. |integer |Obligatorio  |  7|
+
+| Atributo  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| name_gender| Nombre de la película que se quiere editar |string |Obligatorio  |  3|
+|prox_estreno| nombre del proximo estreno perteneciente a este genero|string|obligatorio|Soy otaku|
+
+ejemplo de body:
+```json
+{
+    "name_gender": "Drama",
+    "prox_estreno": "quinto sentido"
+}
+```
+respuesta: Status 200 "OK"
