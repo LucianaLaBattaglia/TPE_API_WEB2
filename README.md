@@ -22,17 +22,13 @@ Tenga en cuenta que al realizar una peticion recibira un Json (de ser requerido)
 ### Obtener coleccion de peliculas
 Obtiene el listado de peliculas ordenadas por ID de manera descendente.
 
-**GET**  https://localhost/Api/movies  
 
-
-
-Ejemplo de respuesta
 | Verbo  | End-point    | Ejemplo  |
 | --------| ------------| ------------ | 
 | GET | Api/movies     | https://localhost/Api/movies |
 
 
-respuesta: 
+ejemplo de respuesta: 
 200 - "OK"
 ```json
 [
@@ -96,7 +92,51 @@ permite agregar una pelicula a la base de datos
 | id_gender | ID del genero al cual pertenece la película que se desea agregar |integer |Obligatorio  |  5|
 | movie_date | Año de estreno de la película que se quiere agregar|integer|Obligatorio  | 2020|
 
+ejemplo de body:
 
+```json
+{
+   
+    "movie_name": "Guardianes de la Galaxia",
+    "movie_image": "http://gnula.nu/wp-content/uploads/2014/08/guardianes_de_la_galaxia.jpg",
+    "synopsis": "Se trata de una aventura espacial de proporciones épicas y llena de acción...",
+    "id_gender": "5",
+    "movie_date": "2010"
+}
+
+```
+respuesta: 201 "Create OK"
+
+
+### Agregar pelicula
+permite agregar una pelicula a la base de datos
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| POST| Api/movies    | https://localhost/Api/movies |
+
+| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| movie_name | Nombre de la película que se quiere agregar. |string |Obligatorio  |  El oso panda|
+|movie_image |url a la imagen de la pelicula | string | Obligatorio| http://galeria/imagen.jpg |
+| synopsis | Breve descripción de la película que quiere agregar |string |Obligatorio  |  Las increibles aventuras de el oso panda|
+| id_gender | ID del genero al cual pertenece la película que se desea agregar |integer |Obligatorio  |  5|
+| movie_date | Año de estreno de la película que se quiere agregar|integer|Obligatorio  | 2020|
+
+ejemplo de body:
+
+```json
+{
+    "id_movie": 3,
+    "movie_name": "Guardianes de la Galaxia",
+    "movie_image": "http://gnula.nu/wp-content/uploads/2014/08/guardianes_de_la_galaxia.jpg",
+    "synopsis": "Se trata de una aventura espacial de proporciones épicas y llena de acción...",
+    "id_gender": "5",
+    "movie_date": "2010"
+}
+
+```
+respuesta: 201 "Create OK"
 
 
 
