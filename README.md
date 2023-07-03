@@ -17,7 +17,7 @@ La api utiliza  los siguientes codigos para reportar los distintos errores que p
 
 ## Como realizar peticiones
 A continuacion se detalla las distintas rutas (endpoint) para realizar las distintas peticiones, algunas de ellas llevan parametros tanto obligatorios como opcionales.
-Tenga en cuenta que al realizar una peticion recibira un Json (de ser requerido) y un codigo de error notificando el estado de la peticion.
+Tenga en cuenta que al realizar una peticion recibira un Json  y/o un codigo de error notificando el estado de la peticion.
 
 
 ## Peliculas
@@ -52,8 +52,8 @@ ejemplo de respuesta: Status:  200  "OK"
 | Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | Id_gender  |  Envia un ID de genero de peliculas para filtrar los resultados por los diferentes generos disponibles |  Integer |  https://localhost/Api/movies?id_gender=1 |  Opcional |
-| sort  | Envía este parámetro para ordenar las películas por diferentes atributos. valores posibles: 1)*id_movie*: Ordena por id  2)*movie_name*: ordena por orden nombre de película 3)*movie_date*: ordena por año de estreno 4)*movie_id_gender*: ordena por el ID del genero -movie_name: ordena por nombre de pelicula| string  | https://localhost/Api/movies?sort=id_movie  | Opcional  |
-| order  | Envía este parámetro para especificar el sentido del orden de las películas, | string  |   https://localhost/Api/movies?sort=id_movie&&order=asc | opcional  |
+| sort  | Envía este parámetro para ordenar las películas por diferentes atributos:` id_movie`, `movie_name`, `id_gender`, `movie_date`| string  | https://localhost/Api/movies?sort=id_movie  | Opcional  |
+| order  | Envía este parámetro para especificar el sentido del orden de las películas. Valores posibles `asc`(orden ascendente) y `desc` (orden descendente) | string  |   https://localhost/Api/movies?sort=id_movie&&order=asc | opcional  |
 |  page |   Envia este parametro para obtener la lista de películas paginadas obtenidas de a 5  | integer |  https://localhost/Api/movies?page=1 |  opcional |
 
 ### Obtener una pelicula en particular
@@ -65,7 +65,7 @@ ejemplo de respuesta: Status:  200  "OK"
 
 | Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| id|ID de la pelicula a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
+| :ID|ID de la pelicula a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
 
 respuesta: Status:  200 "OK"
 
@@ -157,7 +157,7 @@ Permite eliminar una pelicula
 
 | Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| id | ID de la película que se quiere eliminar. |integer |Obligatorio  |  3|
+| :ID | ID de la película que se quiere eliminar. |integer |Obligatorio  |  3|
 
 Respuesta: Status:  200 "OK"
 
@@ -200,7 +200,7 @@ ejemplo de respuesta: Status:  200 "OK"
 
 | Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| id|ID del genero a obtener |Integer |https://localhost/Api/genders/2  | Obligatorio |
+| :ID|ID del genero a obtener |Integer |https://localhost/Api/genders/2  | Obligatorio |
 
 respuesta: Status:  200 "OK"
 
@@ -237,3 +237,17 @@ ejemplo de body:
 }
 ```
 respuesta: Status 200 "OK"
+
+
+### Eliminar un genero
+Permite eliminar un genero
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ |
+| DELETE| Api/genders/:ID    | https://localhost/Api/genders/3 |
+
+| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| :ID| ID del genero que se quiere eliminar. |integer |Obligatorio  |  3|
+
+Respuesta: Status:  200 "OK"
