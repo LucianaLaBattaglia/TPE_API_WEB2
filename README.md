@@ -19,6 +19,10 @@ La api utiliza  los siguientes codigos para reportar los distintos errores que p
 A continuacion se detalla las distintas rutas (endpoint) para realizar las distintas peticiones, algunas de ellas llevan parametros tanto obligatorios como opcionales.
 Tenga en cuenta que al realizar una peticion recibira un Json (de ser requerido) y un codigo de error notificando el estado de la peticion.
 
+
+## Peliculas
+En esta seccion se desarrollaran los servicios relacionados al recurso **peliculas**
+
 ### Obtener coleccion de peliculas
 Obtiene el listado de peliculas ordenadas por ID de manera descendente.
 
@@ -28,8 +32,8 @@ Obtiene el listado de peliculas ordenadas por ID de manera descendente.
 | GET | Api/movies     | https://localhost/Api/movies |
 
 
-ejemplo de respuesta: 
-200 - "OK"
+ejemplo de respuesta: Status:  200  "OK"
+
 ```json
 [
     {
@@ -63,7 +67,7 @@ ejemplo de respuesta:
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | id|ID del contacto a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
 
-respuesta: 200 "OK"
+respuesta: Status:  200 "OK"
 
 ```json
 {
@@ -105,10 +109,10 @@ ejemplo de body:
 }
 
 ```
-respuesta: 201 "Create OK"
+respuesta: Status:  201 "Create OK"
 
 
-### Agregar pelicula
+### Editar pelicula
 permite agregar una pelicula a la base de datos
 
 | Verbo  | End-point    | Ejemplo  |
@@ -117,11 +121,12 @@ permite agregar una pelicula a la base de datos
 
 | Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| movie_name | Nombre de la película que se quiere agregar. |string |Obligatorio  |  El oso panda|
+| id_movie | ID de la película que se quiere editar. |integer |Obligatorio  |  3|
+| movie_name | Nombre de la película que se quiere editar. |string |Obligatorio  |  La mascara|
 |movie_image |url a la imagen de la pelicula | string | Obligatorio| http://galeria/imagen.jpg |
-| synopsis | Breve descripción de la película que quiere agregar |string |Obligatorio  |  Las increibles aventuras de el oso panda|
-| id_gender | ID del genero al cual pertenece la película que se desea agregar |integer |Obligatorio  |  5|
-| movie_date | Año de estreno de la película que se quiere agregar|integer|Obligatorio  | 2020|
+| synopsis | Breve descripción de la película que quiere editar |string |Obligatorio  |  Una misteriosa masca que concede poderes|
+| id_gender | ID del genero al cual pertenece la película que se desea editar |integer |Obligatorio  |  5|
+| movie_date | Año de estreno de la película que se quiere editar|integer|Obligatorio  | 2020|
 
 ejemplo de body:
 
@@ -136,7 +141,51 @@ ejemplo de body:
 }
 
 ```
-respuesta: 201 "Create OK"
+respuesta: Status:  200 " OK"
 
+
+### Eliminar una pelicula
+Permite eliminar una pelicula
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| DELETE| Api/movies/:ID    | https://localhost/Api/movies/3 |
+
+| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| id | ID de la película que se quiere eliminar. |integer |Obligatorio  |  3|
+
+Respuesta: Status:  200 "OK"
+
+
+
+## Generos
+En esta seccion se desarrollaran los servicios relacionados al recurso **generos**
+
+### Obtener coleccion de generos
+Permite obtener un listado de todos los generos
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| GET| Api/genders    | https://localhost/Api/genders |
+
+ejemplo de respuesta: Status:  200 "OK"
+
+```json
+[
+{
+        "id_gender": 1,
+        "name_gender": "Drama",
+        "amount": 1,
+        "prox_estreno": "Sexto sentido"
+    },
+    {
+        "id_gender": 2,
+        "name_gender": "Terror",
+        "amount": 2,
+        "prox_estreno": "Aterrados"
+    }
+]
+```
 
 
