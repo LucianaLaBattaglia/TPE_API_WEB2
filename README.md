@@ -24,15 +24,16 @@ Obtiene el listado de peliculas ordenadas por ID de manera descendente.
 
 **GET**  https://localhost/Api/movies  
 
-codigo de respuesta: 200 - "OK"
+
 
 Ejemplo de respuesta
-| Vervo  | End-point  |codigo de error   | Ejemplo  |
-| --------| ------------ | ------------ | ------------ | 
-| GET | Api/movies    | 200 "OK"  | https://localhost/Api/movies |
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| GET | Api/movies     | https://localhost/Api/movies |
 
 
 respuesta: 
+200 - "OK"
 ```json
 [
     {
@@ -40,20 +41,60 @@ respuesta:
         "movie_name": "Guardianes de la Galaxia",
         "movie_image": "http://gnula.nu/wp-content/uploads/2014/08/guardianes_de_la_galaxia.jpg",
         "synopsis": "Se trata de una aventura espacial de proporciones épicas y llena de acción...",
-        "id_gender": 5,
+        "name_gender": "Comedia",
+        "movie_date": "2010"
+
 }
 ]
 
 ```
 ##### Query params aceptados
-| Parametro  | Descripcion  | Tipo  | Ejemplo  | De caracter  |
+| Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | Id_gender  |  Envia un ID de genero de peliculas para filtrar los resultados por los diferentes generos disponibles |  Integer |  https://localhost/Api/movies?id_gender=1 |  Opcional |
-| sort  | Envía este parámetro para ordenar las películas por diferentes atributos  -id_movie: Ordena por id  -movie_name: ordena por nombre de pelicula| string  | https://localhost/Api/movies?sort=id_movie  | Opcional  |
+| sort  | Envía este parámetro para ordenar las películas por diferentes atributos. valores posibles: 1)*id_movie*: Ordena por id  2)*movie_name*: ordena por orden nombre de película 3)*movie_date*: ordena por año de estreno 4)*movie_id_gender*: ordena por el ID del genero -movie_name: ordena por nombre de pelicula| string  | https://localhost/Api/movies?sort=id_movie  | Opcional  |
 | order  | Envía este parámetro para especificar el sentido del orden de las películas, | string  |   https://localhost/Api/movies?sort=id_movie&&order=asc | opcional  |
-|  page |  integer |  Envia este parametro para obtener la lista de películas paginadas obtenidas de a 5 |  https://localhost/Api/movies?page=1 |  opcional |
-|   |   |   |   |   |
-|   |   |   |   |   |
+|  page |   Envia este parametro para obtener la lista de películas paginadas obtenidas de a 5  | integer |  https://localhost/Api/movies?page=1 |  opcional |
+
+### Obtener una pelicula en particular
+
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| GET | Api/movies/:ID     | https://localhost/Api/movies/:ID |
+
+| Parametro  | Descripcion  | Tipo  | Ejemplo  | caracter  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| id|ID del contacto a obtener |Integer |https://localhost/Api/movies/2  | Obligatorio |
+
+respuesta: 200 "OK"
+
+```json
+{
+    "id_movie": 3,
+    "movie_name": "Guardianes de la Galaxia",
+    "movie_image": "http://gnula.nu/wp-content/uploads/2014/08/guardianes_de_la_galaxia.jpg",
+    "synopsis": "Se trata de una aventura espacial de proporciones épicas y llena de acción...",
+    "name_gender": "Comedia",
+    "movie_date": "2010"
+}
+
+```
+
+### Agregar pelicula
+permite agregar una pelicula a la base de datos
+
+| Verbo  | End-point    | Ejemplo  |
+| --------| ------------| ------------ | 
+| POST| Api/movies    | https://localhost/Api/movies |
+
+| Parametro  | Descripcion  | Tipo  |  caracter  | Ejemplo |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| movie_name | Nombre de la película que se quiere agregar. |string |Obligatorio  |  El oso panda|
+|movie_image |url a la imagen de la pelicula | string | Obligatorio| http://galeria/imagen.jpg |
+| synopsis | Breve descripción de la película que quiere agregar |string |Obligatorio  |  Las increibles aventuras de el oso panda|
+| id_gender | ID del genero al cual pertenece la película que se desea agregar |integer |Obligatorio  |  5|
+| movie_date | Año de estreno de la película que se quiere agregar|integer|Obligatorio  | 2020|
 
 
 
